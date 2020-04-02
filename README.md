@@ -1,7 +1,7 @@
 # lstm-qrs-detector
 CNN-LSTM based QRS detector for ECG signals
 
-This project implements a deep learning based QRS detector for ECG signals. Specifically, a hybrid CNN-LSTM model is used. To get right to the punchline, here's the model:
+This project implements a deep learning based QRS detector for ECG signals. Specifically, a hybrid CNN-LSTM model is used. On the test set, this model achieves an f1 of 0.88 and accuracy of 0.90. To get right to the punchline, here's the model:
 ```
 #first CNN
 model = Sequential()
@@ -84,9 +84,3 @@ Additionally, the ROC:
 On the testing set, f1=0.88 and accuracy=0.90. An example classification result:
 ![Prediction](https://github.com/nerajbobra/lstm-qrs-detector/blob/master/predictions/1127.png
  "Prediction")
-
-
-
-
-
-

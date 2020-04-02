@@ -83,8 +83,7 @@ Additionally, the ROC:
 
 ## 4. Evaluate the Model
 On the testing set, f1=0.88 and accuracy=0.97. An example classification result:
-![Prediction](https://github.com/nerajbobra/lstm-qrs-detector/blob/master/predictions/1127.png
- "Prediction")
+![Prediction](https://github.com/nerajbobra/lstm-qrs-detector/blob/master/predictions/220.png "Prediction")
  
 ## Other Notes
 The data used for this analysis is available at the following link: 

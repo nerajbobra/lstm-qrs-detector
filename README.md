@@ -71,9 +71,19 @@ Next, the scalogram (continuous wavelet transform) is calculated. Since there is
 ![Scalogram](https://github.com/nerajbobra/lstm-qrs-detector/blob/master/cwt/sele0170_ch1.png
  "Scalogram")
 
+## 3. Train the Model
+For training, a validation split of 10% was used and an early stopping criterion was implemented based on the validation loss. 
+The accuracy and loss over the training session:
+![Accuracy](https://github.com/nerajbobra/lstm-qrs-detector/blob/master/plots/accuracy.png "Accuracy")
+![Loss](https://github.com/nerajbobra/lstm-qrs-detector/blob/master/plots/loss.png "Loss")
 
+Additionally, the ROC:
+![ROC](https://github.com/nerajbobra/lstm-qrs-detector/blob/master/plots/ROC.png "ROC")
 
-
+## 4. Evaluate the Model
+On the testing set, f1=0.88 and accuracy=0.90. An example classification result:
+![Prediction](https://github.com/nerajbobra/lstm-qrs-detector/blob/master/predictions/1127.png
+ "Prediction")
 
 
 

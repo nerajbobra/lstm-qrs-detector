@@ -1,25 +1,25 @@
 # lstm-qrs-detector
 CNN-LSTM based QRS detector for ECG signals
 
-This project implements a deep learning based QRS detector for ECG signals. Specifically, a hybrid CNN-LSTM model is used. On the test set, this model achieves an f1 of 0.88 and accuracy of 0.90. To get right to the punchline, here's the model:
+This project implements a deep learning based QRS detector for ECG signals. Specifically, a hybrid CNN-LSTM model is used. On the test set, this model achieves an f1 of 0.88 and accuracy of 0.97. To get right to the punchline, here's the model:
 ```
 #first CNN
 model = Sequential()
-model.add(Conv2D(filters=16, kernel_size=7, padding='same', kernel_initializer=glorot_normal(), input_shape=X_train.shape[1:]))
+model.add(Conv2D(filters=16, kernel_size=7, padding='same', input_shape=X_train.shape[1:]))
 model.add(Activation('relu'))
 model.add(BatchNormalization())
 model.add(MaxPooling2D(pool_size=(1,2)))
 model.add(Dropout(0.1))
 
 #second CNN
-model.add(Conv2D(filters=32, kernel_size=5, padding='same', kernel_initializer=glorot_normal()))
+model.add(Conv2D(filters=32, kernel_size=5, padding='same'))
 model.add(Activation('relu'))
 model.add(BatchNormalization())
 model.add(MaxPooling2D(pool_size=(1,2)))
 model.add(Dropout(0.1))
 
 #third CNN
-model.add(Conv2D(filters=64, kernel_size=3, padding='same', kernel_initializer=glorot_normal()))
+model.add(Conv2D(filters=64, kernel_size=3, padding='same'))
 model.add(Activation('relu'))
 model.add(BatchNormalization())
 model.add(MaxPooling2D(pool_size=(1,5)))
@@ -46,10 +46,10 @@ model.add(TimeDistributed(Dense(2, activation='softmax')))
 ```
 
 To run the code in this project, run the following notebooks:
-1. pull_qt_db.ipynb: This notebook pulls data from the Physionet QT database, which is the data source for this project
-2. preprocess.ipynb: This notebook applies some filtering, baseline wander removal, and calculated the scalogram (ie continuous wavelet transform)
-3. gen_train_test_data.ipynb: This notebook partitions the data into training and testing sets
-4. qrs_detector: This notebook trains the model and evaluates its performance
+1. ```pull_qt_db.ipynb```: This notebook pulls data from the Physionet QT database, which is the data source for this project
+2. ```preprocess.ipynb```: This notebook applies some filtering, baseline wander removal, and calculated the scalogram (ie continuous wavelet transform)
+3. ```gen_train_test_data.ipynb```: This notebook partitions the data into training and testing sets
+4. ```qrs_detector.ipynb```: This notebook trains the model and evaluates its performance
 
 The remainder of this readme will cover the different steps in the analysis pipeline.
 
@@ -67,7 +67,7 @@ First, the baseline wander is removed. Instead of using an FIR filter, which wil
 An example result:
 ![Baseline Wander Removal](https://github.com/nerajbobra/lstm-qrs-detector/blob/master/baseline_filtered/sel31_ch1.png "Baseline Wander Removal")
 
-Next, the scalogram (continuous wavelet transform) is calculated. Since there isn't a lot of energy above 60Hz, the signal is first downsampled to 125Hz using an anti-aliasing lowpass filter. The morlet wavelet is used for this computation. An example result:
+Next, the scalogram (continuous wavelet transform) is calculated. Since there isn't a lot of energy above 60Hz, the signal is first downsampled to 125Hz using an anti-aliasing lowpass filter. The wavelet transform is then calculated using the morlet wavelet. An example result:
 ![Scalogram](https://github.com/nerajbobra/lstm-qrs-detector/blob/master/cwt/sele0170_ch1.png
  "Scalogram")
 
@@ -81,7 +81,7 @@ Additionally, the ROC:
 ![ROC](https://github.com/nerajbobra/lstm-qrs-detector/blob/master/plots/ROC.png "ROC")
 
 ## 4. Evaluate the Model
-On the testing set, f1=0.88 and accuracy=0.90. An example classification result:
+On the testing set, f1=0.88 and accuracy=0.97. An example classification result:
 ![Prediction](https://github.com/nerajbobra/lstm-qrs-detector/blob/master/predictions/1127.png
  "Prediction")
  

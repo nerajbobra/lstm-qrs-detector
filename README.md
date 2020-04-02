@@ -74,8 +74,9 @@ Next, the scalogram (continuous wavelet transform) is calculated. Since there is
 ## 3. Train the Model
 For training, a validation split of 10% was used and an early stopping criterion was implemented based on the validation loss. 
 The accuracy and loss over the training session:
-![Accuracy](https://github.com/nerajbobra/lstm-qrs-detector/blob/master/plots/accuracy.png "Accuracy")
-![Loss](https://github.com/nerajbobra/lstm-qrs-detector/blob/master/plots/loss.png "Loss")
+
+<img src="https://github.com/nerajbobra/lstm-qrs-detector/blob/master/plots/accuracy.png" width="775">
+<img src="https://github.com/nerajbobra/lstm-qrs-detector/blob/master/plots/loss.png" width="775">
 
 Additionally, the ROC:
 ![ROC](https://github.com/nerajbobra/lstm-qrs-detector/blob/master/plots/ROC.png "ROC")

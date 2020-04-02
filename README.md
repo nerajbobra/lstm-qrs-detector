@@ -1,5 +1,5 @@
 # lstm-qrs-detector
-CNN-LSTM based QRS detector for ECG signals
+## CNN-LSTM based QRS detector for ECG signals
 
 This project implements a deep learning based QRS detector for ECG signals. Specifically, a hybrid CNN-LSTM model is used. On the test set, this model achieves an f1 of 0.88 and accuracy of 0.97. To get right to the punchline, here's the model:
 ```
@@ -53,7 +53,7 @@ To run the code in this project, run the following notebooks:
 
 The remainder of this readme will cover the different steps in the analysis pipeline.
 
-## 1. Download the Data
+## 1. Download/Parse the Data
 The wfdb library is leveraged to download data from the Physionet QT database. Small sections of each file are labeled with P,Q,R,S, and T points. Those sections of the data with labels are then defined as "inds_to_keep".
 
 An example plot of the ECG data, along with QRS labels:

@@ -84,3 +84,10 @@ Additionally, the ROC:
 On the testing set, f1=0.88 and accuracy=0.90. An example classification result:
 ![Prediction](https://github.com/nerajbobra/lstm-qrs-detector/blob/master/predictions/1127.png
  "Prediction")
+ 
+## Other Notes
+The data used for this analysis is available at the following link: 
+https://physionet.org/content/qtdb/1.0.0/
+
+The following matlab tutorial was used as a reference: 
+https://www.mathworks.com/help/signal/examples/classify-ecg-signals-using-long-short-term-memory-networks.html

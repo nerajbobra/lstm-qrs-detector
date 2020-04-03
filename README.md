@@ -47,14 +47,14 @@ model.add(TimeDistributed(Dense(2, activation='softmax')))
 
 To run the code in this project, run the following notebooks:
 1. ```pull_qt_db.ipynb```: This notebook pulls data from the Physionet QT database, which is the data source for this project
-2. ```preprocess.ipynb```: This notebook applies some filtering, baseline wander removal, and calculated the scalogram (ie continuous wavelet transform)
+2. ```preprocess.ipynb```: This notebook applies some filtering, baseline wander removal, and calculates the scalogram (ie continuous wavelet transform)
 3. ```gen_train_test_data.ipynb```: This notebook partitions the data into training and testing sets
 4. ```qrs_detector.ipynb```: This notebook trains the model and evaluates its performance
 
 The remainder of this readme will cover the different steps in the analysis pipeline.
 
 ## 1. Download/Parse the Data
-The wfdb library is leveraged to download data from the Physionet QT database. Small sections of each file are labeled with P,Q,R,S, and T points. Those sections of the data with labels are then defined as "inds_to_keep".
+The wfdb library is used to download data from the Physionet QT database. Small sections of each file are labeled with P,Q,R,S, and T points. 
 
 An example plot of the ECG data, along with QRS labels:
 ![sel100](https://github.com/nerajbobra/lstm-qrs-detector/blob/master/plots/sel100.png "sel100")

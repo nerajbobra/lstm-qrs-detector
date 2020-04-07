@@ -49,7 +49,7 @@ An example plot of the ECG data, along with QRS labels:
 ![sel100](https://github.com/nerajbobra/lstm-qrs-detector/blob/master/plots/sel100.png "sel100")
 
 ## 2. Preprocess the Data
-First, the baseline wander is removed. Instead of using an FIR filter, which will inevitabely remove frequencies of interest regardless of how well it is designed, the method of local linear regression is used instead. The idea is basically to calculate a linear regression over a window of about 1.5 seconds, and then define the "baseline" to be the center of that window. Then shift the window forward by one point, and repeat. The process is extremely efficient because the linear regression can be solved in a closed form analytical solution, as explained below:
+First, the baseline wander is removed. Instead of using an FIR filter, which will inevitably remove frequencies of interest regardless of how well it is designed, the method of local linear regression is used instead. The idea is basically to calculate a linear regression over a window of about 1.5 seconds, and then define the "baseline" to be the center of that window. Then shift the window forward by one point, and repeat. The process is extremely efficient because the linear regression can be solved in a closed form analytical solution, as explained below:
 
 <img src="https://github.com/nerajbobra/lstm-qrs-detector/blob/master/linear_regression.jpg" width="600">
 
@@ -74,9 +74,9 @@ Additionally, the ROC:
 On the testing set, f1=0.79 and accuracy=0.95. An example classification result:
 ![Prediction](https://github.com/nerajbobra/lstm-qrs-detector/blob/master/predictions/707.png "Prediction")
  
-## Other Notes
-The data used for this analysis is available at the following link: 
-https://physionet.org/content/qtdb/1.0.0/
+## Conclusion/Other Notes
+QRS detection is a challenging problem. The input data being modeled is nonlinear and high dimensionality, and the one-to-one LSTM classification architecture is a data hungry approach. While the model does perform well, it shows classic signs of overfitting -- the training loss is noticeably lower than the validation loss. To account for that, I tried increasing regularization via Dropout layers (L1 or L2 regularization is another potential approach that I didn't attempt). I also tried simplifying the architecture to a shallower model, but the performance drastically reduced as underfitting became an issue. More data would likely be needed to achieve improved performance.
 
-The following matlab tutorial was used as a reference: 
-https://www.mathworks.com/help/signal/examples/classify-ecg-signals-using-long-short-term-memory-networks.html
+The data used for this analysis is available at the following link: https://physionet.org/content/qtdb/1.0.0/
+
+The following matlab tutorial was used as a reference: https://www.mathworks.com/help/signal/examples/classify-ecg-signals-using-long-short-term-memory-networks.html

@@ -1,45 +1,34 @@
 # lstm-qrs-detector
 ## CNN-LSTM based QRS detector for ECG signals
 
-This project implements a deep learning based QRS detector for ECG signals. Specifically, a hybrid CNN-LSTM model is used. On the test set, this model achieves an f1 of 0.88 and accuracy of 0.97. To get right to the punchline, here's the model:
+This project implements a deep learning based QRS detector for ECG signals. Specifically, a hybrid CNN-LSTM model is used. On the test set, this model achieves an f1 of 0.79 and accuracy of 0.95. To get right to the punchline, here's the model:
 ```
 #first CNN
 model = Sequential()
-model.add(Conv2D(filters=16, kernel_size=7, padding='same', input_shape=X_train.shape[1:]))
+model.add(Conv2D(filters=32, kernel_size=5, padding='same', input_shape=X_train.shape[1:]))
 model.add(Activation('relu'))
 model.add(BatchNormalization())
-model.add(MaxPooling2D(pool_size=(1,2)))
-model.add(Dropout(0.1))
+model.add(MaxPooling2D(pool_size=(1, 4)))
+model.add(Dropout(0.25))
 
 #second CNN
 model.add(Conv2D(filters=32, kernel_size=5, padding='same'))
 model.add(Activation('relu'))
 model.add(BatchNormalization())
-model.add(MaxPooling2D(pool_size=(1,2)))
-model.add(Dropout(0.1))
-
-#third CNN
-model.add(Conv2D(filters=64, kernel_size=3, padding='same'))
-model.add(Activation('relu'))
-model.add(BatchNormalization())
-model.add(MaxPooling2D(pool_size=(1,5)))
-model.add(Dropout(0.1))
+model.add(MaxPooling2D(pool_size=(1, 4)))
+model.add(Dropout(0.25))
 
 #first LSTM. note that we need to do a timedistributed flatten as a transition from CNN to LSTM
 model.add(TimeDistributed(Flatten()))
-model.add(Bidirectional(LSTM(units=75, return_sequences=True)))
-model.add(Dropout(0.1))
-model.add(BatchNormalization())
+model.add(Bidirectional(LSTM(units=100, return_sequences=True, dropout=0.25)))
 
 #second LSTM
-model.add(Bidirectional(LSTM(units=25, return_sequences=True)))
-model.add(Dropout(0.1))
-model.add(BatchNormalization())
+model.add(Bidirectional(LSTM(units=50, return_sequences=True, dropout=0.25)))
 
 #dense layer
 model.add(TimeDistributed(Dense(5, activation='relu')))
-model.add(Dropout(0.1))
 model.add(BatchNormalization())
+model.add(Dropout(0.25))
 
 #activation layer
 model.add(TimeDistributed(Dense(2, activation='softmax')))
@@ -82,8 +71,8 @@ Additionally, the ROC:
 ![ROC](https://github.com/nerajbobra/lstm-qrs-detector/blob/master/plots/ROC.png "ROC")
 
 ## 4. Evaluate the Model
-On the testing set, f1=0.88 and accuracy=0.97. An example classification result:
-![Prediction](https://github.com/nerajbobra/lstm-qrs-detector/blob/master/predictions/220.png "Prediction")
+On the testing set, f1=0.79 and accuracy=0.95. An example classification result:
+![Prediction](https://github.com/nerajbobra/lstm-qrs-detector/blob/master/predictions/707.png "Prediction")
  
 ## Other Notes
 The data used for this analysis is available at the following link: 
